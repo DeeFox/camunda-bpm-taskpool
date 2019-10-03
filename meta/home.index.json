@@ -1,0 +1,31 @@
+{
+  "ownKey": "home",
+  "ownPages": [
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://www.holunda.io/camunda-bpm-taskpool",
+        "fileName": "",
+        "extension": "html",
+        "usePrettyUrl": true,
+        "link": "https://www.holunda.io/camunda-bpm-taskpool"
+      },
+      "description": "",
+      "title": "Camunda BPM Taskpool",
+      "content": ""
+    },
+    {
+      "reference": {
+        "path": "",
+        "baseUrl": "https://www.holunda.io/camunda-bpm-taskpool",
+        "fileName": "404",
+        "extension": "html",
+        "usePrettyUrl": false,
+        "link": "https://www.holunda.io/camunda-bpm-taskpool/404.html"
+      },
+      "description": "",
+      "title": "Camunda BPM Taskpool",
+      "content": ""
+    }
+  ]
+}

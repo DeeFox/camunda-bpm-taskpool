@@ -1,0 +1,53 @@
+{
+  "ownKey": "pages",
+  "childrenPages": {
+    "license": {
+      "ownKey": "license",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-bpm-taskpool",
+          "fileName": "license",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-bpm-taskpool/license"
+        },
+        "description": "",
+        "title": "License",
+        "content": ""
+      }]
+    },
+    "changelog": {
+      "ownKey": "changelog",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-bpm-taskpool",
+          "fileName": "changelog",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-bpm-taskpool/changelog"
+        },
+        "description": "",
+        "title": "Changelog",
+        "content": ""
+      }]
+    },
+    "quick-start": {
+      "ownKey": "quick-start",
+      "ownPages": [{
+        "reference": {
+          "path": "",
+          "baseUrl": "https://www.holunda.io/camunda-bpm-taskpool",
+          "fileName": "quick-start",
+          "extension": "html",
+          "usePrettyUrl": true,
+          "link": "https://www.holunda.io/camunda-bpm-taskpool/quick-start"
+        },
+        "description": "",
+        "title": "Quick Start",
+        "content": "<div class=\"sect1\">\n<h2 id=\"_quick_start\">Quick Start<\/h2>\n<div class=\"sectionbody\">\n<div class=\"sect2\">\n<h3 id=\"_start_example_task_list_application\">Start example task list application<\/h3>\n<div class=\"paragraph\">\n<p>To start quickly, just start the Example Task list Application. For doing so, please run:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-bash\" data-lang=\"bash\">git clone https://github.com/holunda-io/camunda-bpm-taskpool.git\ncd camunda-bpm-taskpool\n./.docker/setup.sh\ndocker-compose up\n./mvn spring-boot:run -f examples/taskpool-application<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>Now, you should have a running infrastructure and the example task list.<\/p>\n<\/div>\n<\/div>\n<div class=\"sect2\">\n<h3 id=\"_configure_your_process_application\">Configure your process application<\/h3>\n<div class=\"paragraph\">\n<p>If start using Camunda BPM Taskpool, you need to enable your Camunda process engine to use the library.\nFor doing so, add the <code>camunda-bpm-taskpool-engine-springboot-starter<\/code> library. In Maven, add the following dependency\nto your <code>pom.xml<\/code> :<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-xml\" data-lang=\"xml\">&lt;dependency&gt;\n  &lt;groupId&gt;io.holunda.taskpool&lt;/groupId&gt;\n  &lt;artifactId&gt;camunda-bpm-taskpool-engine-springboot-starter&lt;/artifactId&gt;\n  &lt;version&gt;${camunda-bpm-taskpool.version}&lt;/version&gt;\n&lt;/dependency&gt;<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>Now, find your SpringBoot application class and add an additional annotation to it:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-java\" data-lang=\"java\">@SpringBootApplication\n@EnableProcessApplication\n@EnableTaskpoolEngineSupport\npublic class MyApplication {\n\n  public static void main(String... args) {\n    SpringApplication.run(MyApplication.class, args);\n  }\n}<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>Finally, add the following block to your <code>application.yml<\/code>:<\/p>\n<\/div>\n<div class=\"listingblock\">\n<div class=\"content\">\n<pre class=\"highlight\"><code class=\"language-yaml\" data-lang=\"yaml\">camunda:\n  bpm:\n    default-serialization-format: application/json\n    history-level: full\n  taskpool:\n    engine-eventing:\n        enabled: true\n    collector:\n      tasklist-url: http://localhost:8081/tasklist/\n      process:\n        enabled: true\n      enricher:\n        application-name: ${spring.application.name}  # default\n        type: processVariables\n      sender:\n        enabled: true\n        type: tx\n    dataentry:\n      sender:\n        enabled: true\n        type: simple\n        applicationName: ${spring.application.name}  # default\n    form-url-resolver:\n      defaultTaskTemplate:  \"/tasks/${formKey}/${id}?userId=%userId%\"\n      defaultApplicationTemplate: \"http://localhost:${server.port}/${applicatioName}\"\n      defaultProcessTemplate: \"/${formKey}?userId=%userId%\"<\/code><\/pre>\n<\/div>\n<\/div>\n<div class=\"paragraph\">\n<p>Now, start your process engine. If you run into a user task, you should see on the console how this is passed to task pool.\nIn order to check the result, just open <a href=\"http://localhost:8081/tasklist/\" class=\"bare\">http://localhost:8081/tasklist/<\/a> in your browser.<\/p>\n<\/div>\n<div class=\"paragraph\">\n<p>For more details on configuration of different options, please consult the <a href=\"/wiki/user-guide/examples\">Taskpool Examples<\/a> and the\n<a href=\"/wiki/user-guide\">User Guide<\/a>.<\/p>\n<\/div>\n<\/div>\n<\/div>\n<\/div>"
+      }]
+    }
+  }
+}

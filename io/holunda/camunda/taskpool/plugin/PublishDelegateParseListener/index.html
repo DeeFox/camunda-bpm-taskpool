@@ -1,0 +1,1975 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+
+
+
+<meta charset="utf-8"/>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
+<meta name="generator" content="Orchid 0.17.2"/>
+<link rel="icon" href="https://www.holunda.io/camunda-bpm-taskpool/favicon.ico">
+
+
+<meta name="robots" content="index, follow">
+
+
+
+<title>PublishDelegateParseListener</title>
+
+
+<meta name="description" content="A component for pooling Camunda BPM user tasks with business data for high performance queries.">
+
+
+
+
+
+<script>
+    window.site = {"orchidVersion":"0.17.2","baseUrl":"https://www.holunda.io/camunda-bpm-taskpool","environment":"debug","version":"2.0.4-SNAPSHOT"};
+</script>
+
+
+
+
+
+<!-- start:debug info -->
+
+<!-- THEME -->
+<!-- Type: BsDoc -->
+<!-- Class: com.eden.orchid.bsdoc.BSDocTheme -->
+
+<!-- PAGE -->
+<!-- Type: kotlindocClass -->
+<!-- Class: com.eden.orchid.kotlindoc.page.KotlindocClassPage -->
+<!-- Layout: index -->
+<!-- Resolved Layout: templates/layouts/index.peb -->
+<!-- Page Template: kotlindocClass, page -->
+<!-- Resolved Page Template:  -->
+
+<!-- RESOURCE -->
+<!-- Class: com.eden.orchid.kotlindoc.resources.KotlinClassdocResource -->
+<!-- Source Filename: io/holunda/camunda/taskpool/plugin/PublishDelegateParseListener.html -->
+
+<!-- COMPLETE PAGE CONFIGURATION -->
+<script>
+    window.allData = {"reference":{"path":"io/holunda/camunda/taskpool/plugin","baseUrl":"https://www.holunda.io/camunda-bpm-taskpool","fileName":"PublishDelegateParseListener","extension":"html","usePrettyUrl":true,"link":"https://www.holunda.io/camunda-bpm-taskpool/io/holunda/camunda/taskpool/plugin/PublishDelegateParseListener"},"description":"","title":"PublishDelegateParseListener"};
+</script>
+
+<!-- end:debug info -->
+
+
+
+<!-- start:inject styles -->
+<link rel="stylesheet" type="text/css" href="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/css/bootstrap.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/github-fork-ribbon-css/0.2.0/gh-fork-ribbon.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.holunda.io/camunda-bpm-taskpool/BsDoc/a9750863/assets/css/bsdoc.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.holunda.io/camunda-bpm-taskpool/BsDoc/a9750863/assets/css/orchidSearch.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.holunda.io/camunda-bpm-taskpool/assets/css/asciidoc-admonitionblock.css"/>
+<link rel="stylesheet" type="text/css" href="https://rawgit.com/PrismJS/prism-themes/master/themes/prism-darcula.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-highlight/prism-line-highlight.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.css"/>
+<!-- end:inject styles -->
+
+
+</head>
+<body>
+
+
+
+
+<a class="github-fork-ribbon left-top"
+   href="https://github.com/holunda-io/camunda-bpm-taskpool"
+   title="Fork me on GitHub">Fork me on GitHub</a>
+
+
+<header class="navbar navbar-fixed-top bs-docs-nav">
+    <div class="container">
+        <div class="navbar-header" role="banner">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="https://www.holunda.io/camunda-bpm-taskpool">Camunda BPM Taskpool</a>
+        </div>
+        <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+            <ul class="nav navbar-nav navbar-right">
+                
+                    
+                        <li><a href="https://www.holunda.io/camunda-bpm-taskpool/quick-start">Quick Start</a></li>
+                    
+                
+                    
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Introduction<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu">
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/introduction/motivation">Motivation</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/introduction/features">Features</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/introduction/solution">Solution Idea</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/introduction/further-outlook">Further outlook</a></li>
+                                
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">User Guide<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu">
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/user-guide/components">Taskpool Components</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/user-guide/examples">Taskpool Examples</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/user-guide/scenarios">Taskpool Usage Scenarios</a></li>
+                                
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Developer Guide<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu">
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/developer-guide/contribution">Contribution</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/wiki/developer-guide/project-setup">Project Setup</a></li>
+                                
+                            </ul>
+                        </li>
+                    
+                
+                    
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Explore<span class="caret"></span></a>
+                            <ul class="dropdown-menu scrollable-menu">
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/changelog">Changelog</a></li>
+                                
+                                    <li><a href="https://www.holunda.io/camunda-bpm-taskpool/license">License</a></li>
+                                
+                            </ul>
+                        </li>
+                    
+                
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<div id="top"></div>
+
+
+    <div class="bs-docs-masthead" id="jumbotron">
+        <div class="container">
+            <h1 class="home-title">PublishDelegateParseListener</h1>
+        </div>
+    </div>
+
+
+<div class="container bs-docs-container">
+    <div class="row">
+        <div class="col-md-9" role="main">
+        <nav aria-label="breadcrumb">
+    <ul class="breadcrumb">
+    
+    
+        <li class="breadcrumb-item active" aria-current="page">PublishDelegateParseListener</li>
+    
+    
+    </ul>
+</nav>
+        
+
+        
+        
+            
+    <!-- start:inject components -->
+    
+        
+            
+        
+            
+                
+                    
+                        <div class="orchid-sourcedoc">
+
+
+<p id="summary">
+    <b>In package <a href="https://www.holunda.io/camunda-bpm-taskpool/io/holunda/camunda/taskpool/plugin">io.holunda.camunda.taskpool.plugin</a></b>
+</p>
+<p>
+    <code style="padding: 0;">
+        class io.holunda.camunda.taskpool.plugin.PublishDelegateParseListener
+    </code>
+</p>
+<div class="class-description" id="description">
+
+</div>
+
+
+
+
+
+
+
+
+
+<h2 id="constructors">Constructors</h2>
+
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="constructor__constructor_publisher___ERROR_CLASS___properties__CamundaEventingProperties_">
+        <code>
+        constructor(publisher: <ERROR CLASS>, properties: <a href="https://www.holunda.io/camunda-bpm-taskpool/io/holunda/camunda/taskpool/plugin/CamundaEventingProperties">CamundaEventingProperties</a>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        publisher: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        properties: <a href="https://www.holunda.io/camunda-bpm-taskpool/io/holunda/camunda/taskpool/plugin/CamundaEventingProperties">CamundaEventingProperties</a>
+        </code>
+        
+    </li>
+
+</ul>
+
+</div>
+
+
+
+
+    <h2 id="methods">Methods</h2>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseUserTask_userTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseUserTask(userTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        userTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBoundaryErrorEventDefinition_errorEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS___nestedErrorEventActivity___ERROR_CLASS__">
+        <code>
+        fun parseBoundaryErrorEventDefinition(errorEventDefinition: <ERROR CLASS>, interrupting: Boolean, activity: <ERROR CLASS>, nestedErrorEventActivity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        errorEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        interrupting: Boolean
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        nestedErrorEventActivity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBoundaryEvent_boundaryEventElement___ERROR_CLASS___scopeElement___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseBoundaryEvent(boundaryEventElement: <ERROR CLASS>, scopeElement: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        boundaryEventElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scopeElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBoundaryMessageEventDefinition_element___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">
+        <code>
+        fun parseBoundaryMessageEventDefinition(element: <ERROR CLASS>, interrupting: Boolean, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        element: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        interrupting: Boolean
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBoundarySignalEventDefinition_signalEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">
+        <code>
+        fun parseBoundarySignalEventDefinition(signalEventDefinition: <ERROR CLASS>, interrupting: Boolean, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        signalEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        interrupting: Boolean
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBoundaryTimerEventDefinition_timerEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">
+        <code>
+        fun parseBoundaryTimerEventDefinition(timerEventDefinition: <ERROR CLASS>, interrupting: Boolean, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        timerEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        interrupting: Boolean
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseBusinessRuleTask_businessRuleTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseBusinessRuleTask(businessRuleTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        businessRuleTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseCallActivity_callActivityElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseCallActivity(callActivityElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        callActivityElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseCompensateEventDefinition_compensateEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseCompensateEventDefinition(compensateEventDefinition: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        compensateEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseEndEvent_endEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseEndEvent(endEventElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        endEventElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseEventBasedGateway_eventBasedGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseEventBasedGateway(eventBasedGwElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        eventBasedGwElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseExclusiveGateway_exclusiveGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseExclusiveGateway(exclusiveGwElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        exclusiveGwElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseInclusiveGateway_inclusiveGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseInclusiveGateway(inclusiveGwElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        inclusiveGwElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseIntermediateCatchEvent_intermediateEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseIntermediateCatchEvent(intermediateEventElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        intermediateEventElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseIntermediateMessageCatchEventDefinition_messageEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseIntermediateMessageCatchEventDefinition(messageEventDefinition: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        messageEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseIntermediateSignalCatchEventDefinition_signalEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseIntermediateSignalCatchEventDefinition(signalEventDefinition: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        signalEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseIntermediateThrowEvent_intermediateEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseIntermediateThrowEvent(intermediateEventElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        intermediateEventElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseIntermediateTimerEventDefinition_timerEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseIntermediateTimerEventDefinition(timerEventDefinition: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        timerEventDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseManualTask_manualTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseManualTask(manualTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        manualTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseMultiInstanceLoopCharacteristics_activityElement___ERROR_CLASS___multiInstanceLoopCharacteristicsElement___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseMultiInstanceLoopCharacteristics(activityElement: <ERROR CLASS>, multiInstanceLoopCharacteristicsElement: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activityElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        multiInstanceLoopCharacteristicsElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseParallelGateway_parallelGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseParallelGateway(parallelGwElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        parallelGwElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseProcess_processElement___ERROR_CLASS___processDefinition___ERROR_CLASS__">
+        <code>
+        fun parseProcess(processElement: <ERROR CLASS>, processDefinition: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        processElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        processDefinition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseReceiveTask_receiveTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseReceiveTask(receiveTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        receiveTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseScriptTask_scriptTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseScriptTask(scriptTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scriptTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseSendTask_sendTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseSendTask(sendTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        sendTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseSequenceFlow_sequenceFlowElement___ERROR_CLASS___scopeElement___ERROR_CLASS___transition___ERROR_CLASS__">
+        <code>
+        fun parseSequenceFlow(sequenceFlowElement: <ERROR CLASS>, scopeElement: <ERROR CLASS>, transition: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        sequenceFlowElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scopeElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        transition: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseServiceTask_serviceTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseServiceTask(serviceTaskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        serviceTaskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseStartEvent_startEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseStartEvent(startEventElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        startEventElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseSubProcess_subProcessElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseSubProcess(subProcessElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        subProcessElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseTask_taskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseTask(taskElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        taskElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+<div class="panel panel-default">
+    <div class="panel-heading" id="method__fun_parseTransaction_transactionElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">
+        <code>
+        fun parseTransaction(transactionElement: <ERROR CLASS>, scope: <ERROR CLASS>, activity: <ERROR CLASS>)
+        </code>
+    </div>
+    <div class="panel-body"></div>
+
+    
+
+    
+<div class="panel-body">
+    <b>Parameters: </b>
+</div>
+<ul class="list-group">
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        transactionElement: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        scope: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+    <li class="list-group-item clearfix">
+        <code class="pull-left">
+        activity: <ERROR CLASS>
+        </code>
+        
+    </li>
+
+</ul>
+
+    
+
+</div>
+
+
+
+
+</div>
+                    
+                
+            
+        
+    
+    <!-- end:inject components -->
+
+
+        
+        </div>
+
+        <!-- Page navigation
+        =========================================== -->
+        <div class="col-md-3" role="complementary">
+        <div class="bs-docs-sidebar hidden-print" id="bs-docs-sidebar">
+    
+        <section id="search" >
+            <form data-orchid-search="">
+                <div class="input-group">
+                    <input type="text" name="query" id="query" class="form-control" placeholder="Search&hellip;">
+                    <span class="input-group-btn"><button type="submit" class="btn btn-default">Go</button></span>
+                </div>
+            </form>
+            <div id="search-results" data-orchid-search-results style="display: none;">
+                <b>Search Results</b>
+                <ul></ul>
+            </div>
+            <div id="search-progress" data-orchid-search-progress style="display: none;">
+                <div class="loader">Loading...</div>
+            </div>
+        </section>
+    
+
+    <ul class="nav bs-docs-sidenav">
+        
+        
+            
+                
+                    <li><a class="divider-subheader">Class Info</a></li>
+                
+            
+        
+        
+            
+                
+                    <li class=""><a href="#summary">Summary</a></li>
+                
+            
+        
+        
+            
+                
+                    <li class=""><a href="#description">Description</a></li>
+                
+            
+        
+        
+            
+                <li class="has-children ">
+                    <a>Constructors</a>
+                    <ul class="nav">
+                        
+                        
+                            
+                                <li class="">
+                                    <a href="#constructor__constructor_publisher___ERROR_CLASS___properties__CamundaEventingProperties_">constructor(publisher: &lt;ERROR CLASS&gt;, properties: CamundaEventingProperties)</a>
+                                </li>
+                            
+                        
+                    </ul>
+                </li>
+            
+        
+        
+            
+                <li class="has-children ">
+                    <a>Methods</a>
+                    <ul class="nav">
+                        
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseUserTask_userTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseUserTask(userTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBoundaryErrorEventDefinition_errorEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS___nestedErrorEventActivity___ERROR_CLASS__">fun parseBoundaryErrorEventDefinition(errorEventDefinition: &lt;ERROR CLASS&gt;, interrupting: Boolean, activity: &lt;ERROR CLASS&gt;, nestedErrorEventActivity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBoundaryEvent_boundaryEventElement___ERROR_CLASS___scopeElement___ERROR_CLASS___activity___ERROR_CLASS__">fun parseBoundaryEvent(boundaryEventElement: &lt;ERROR CLASS&gt;, scopeElement: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBoundaryMessageEventDefinition_element___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">fun parseBoundaryMessageEventDefinition(element: &lt;ERROR CLASS&gt;, interrupting: Boolean, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBoundarySignalEventDefinition_signalEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">fun parseBoundarySignalEventDefinition(signalEventDefinition: &lt;ERROR CLASS&gt;, interrupting: Boolean, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBoundaryTimerEventDefinition_timerEventDefinition___ERROR_CLASS___interrupting__Boolean__activity___ERROR_CLASS__">fun parseBoundaryTimerEventDefinition(timerEventDefinition: &lt;ERROR CLASS&gt;, interrupting: Boolean, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseBusinessRuleTask_businessRuleTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseBusinessRuleTask(businessRuleTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseCallActivity_callActivityElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseCallActivity(callActivityElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseCompensateEventDefinition_compensateEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">fun parseCompensateEventDefinition(compensateEventDefinition: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseEndEvent_endEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseEndEvent(endEventElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseEventBasedGateway_eventBasedGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseEventBasedGateway(eventBasedGwElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseExclusiveGateway_exclusiveGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseExclusiveGateway(exclusiveGwElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseInclusiveGateway_inclusiveGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseInclusiveGateway(inclusiveGwElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseIntermediateCatchEvent_intermediateEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseIntermediateCatchEvent(intermediateEventElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseIntermediateMessageCatchEventDefinition_messageEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">fun parseIntermediateMessageCatchEventDefinition(messageEventDefinition: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseIntermediateSignalCatchEventDefinition_signalEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">fun parseIntermediateSignalCatchEventDefinition(signalEventDefinition: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseIntermediateThrowEvent_intermediateEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseIntermediateThrowEvent(intermediateEventElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseIntermediateTimerEventDefinition_timerEventDefinition___ERROR_CLASS___activity___ERROR_CLASS__">fun parseIntermediateTimerEventDefinition(timerEventDefinition: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseManualTask_manualTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseManualTask(manualTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseMultiInstanceLoopCharacteristics_activityElement___ERROR_CLASS___multiInstanceLoopCharacteristicsElement___ERROR_CLASS___activity___ERROR_CLASS__">fun parseMultiInstanceLoopCharacteristics(activityElement: &lt;ERROR CLASS&gt;, multiInstanceLoopCharacteristicsElement: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseParallelGateway_parallelGwElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseParallelGateway(parallelGwElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseProcess_processElement___ERROR_CLASS___processDefinition___ERROR_CLASS__">fun parseProcess(processElement: &lt;ERROR CLASS&gt;, processDefinition: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseReceiveTask_receiveTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseReceiveTask(receiveTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseScriptTask_scriptTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseScriptTask(scriptTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseSendTask_sendTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseSendTask(sendTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseSequenceFlow_sequenceFlowElement___ERROR_CLASS___scopeElement___ERROR_CLASS___transition___ERROR_CLASS__">fun parseSequenceFlow(sequenceFlowElement: &lt;ERROR CLASS&gt;, scopeElement: &lt;ERROR CLASS&gt;, transition: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseServiceTask_serviceTaskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseServiceTask(serviceTaskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseStartEvent_startEventElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseStartEvent(startEventElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseSubProcess_subProcessElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseSubProcess(subProcessElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseTask_taskElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseTask(taskElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                            
+                                <li class="">
+                                    <a href="#method__fun_parseTransaction_transactionElement___ERROR_CLASS___scope___ERROR_CLASS___activity___ERROR_CLASS__">fun parseTransaction(transactionElement: &lt;ERROR CLASS&gt;, scope: &lt;ERROR CLASS&gt;, activity: &lt;ERROR CLASS&gt;)</a>
+                                </li>
+                            
+                        
+                    </ul>
+                </li>
+            
+        
+    </ul>
+
+    
+    <!-- start:inject components -->
+    
+    <!-- end:inject components -->
+
+
+
+    <a class="back-to-top" href="#top">
+        <i class="glyphicon glyphicon-chevron-up"></i> Back to top
+    </a>
+</div>
+
+        </div>
+    </div>
+</div>
+
+
+<div id="footer">
+    <div class="container bs-docs-container">
+    <footer class="bs-docs-footer" role="contentinfo">
+    <div class="row">
+        <div class="col-xs-12">
+            <nav aria-label="navigateClasses">
+                <ul class="pager">
+                    
+
+                    
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="icons">
+    
+    
+        <a href="https://www.holunda.io/camunda-bpm-taskpool/" class="fa fas fa-home"></a>
+    
+        <a href="https://github.com/holunda-io/camunda-bpm-taskpool" class="fa fa-github"></a>
+    
+        <a href="https://twitter.com/holisticon" class="fa fa-twitter"></a>
+    
+    
+    </div>
+    <br>
+    <p>
+    Documentation template based on the
+    <a href="https://github.com/mistic100/jekyll-bootstrap-doc">Jekyll Bootstrap Doc</a>
+    Jekyll theme by the <a href="https://getbootstrap.com">Bootstrap team</a>. Site created with
+    <a href="https://orchid.netlify.com">Orchid</a>.
+</p>
+
+<ul class="bs-docs-footer-links muted">
+    <li>Currently 2.0.4-SNAPSHOT</li>
+</ul>
+
+</footer>
+    </div>
+</div>
+
+
+<!-- start:inject scripts -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.3.0/bootbox.min.js"></script>
+<script src="https://www.holunda.io/camunda-bpm-taskpool/BsDoc/a9750863/assets/js/bsdoc.js"></script>
+<script src="https://unpkg.com/lunr/lunr.js"></script>
+<script src="https://www.holunda.io/camunda-bpm-taskpool/BsDoc/a9750863/assets/js/orchidSearch.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/prism.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-kotlin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/components/prism-markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-numbers/prism-line-numbers.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/line-highlight/prism-line-highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/toolbar/prism-toolbar.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/show-language/prism-show-language.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/1.7.1/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.8.4/plugins/copy-to-clipboard/prism-copy-to-clipboard.min.js"></script>
+<!-- end:inject scripts -->
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.4.11/d3.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/trianglify/1.2.0/trianglify.min.js"></script>
+
+<script>
+    $(function () {
+        window.colors = ['#B10000', '#000000'];
+                  
+    trianglify({"x_colors":["#000","#B10000","#000"]});
+
+        buildNav();
+    });
+</script>
+
+</body>
+</html>
